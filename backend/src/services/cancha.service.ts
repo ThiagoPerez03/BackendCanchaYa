@@ -1,5 +1,5 @@
 // backend/src/services/cancha.service.ts
-import prisma from '../lib/prisma';
+import prisma from '../config/prisma';
 import { Prisma } from '../generated/prisma/client';
 
 export const crearCancha = (data: Prisma.CanchaCreateInput) => {
@@ -19,11 +19,7 @@ export const obtenerCanchas = () => {
 export const obtenerCanchasPorComplejoId = (complejoId: number) => {
   return prisma.cancha.findMany({
     where: {
-      complejo: {
-        some: {
-          id: complejoId,
-        }
-      }
+      id: complejoId,
     },
     include: {
       deporte: true,
